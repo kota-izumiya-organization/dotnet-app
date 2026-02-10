@@ -1,75 +1,75 @@
-# Task Manager Demo Applications
+# タスクマネージャー デモアプリケーション
 
-This workspace contains two comprehensive .NET task management applications showcasing different frameworks and modern development practices.
+このワークスペースには、異なるフレームワークと最新の開発手法を紹介する2つの包括的な.NETタスク管理アプリケーションが含まれています。
 
-## 🏗️ Project Structure
+## 🏗️ プロジェクト構成
 
 ```
 dotnet-app/
-├── TaskManager/                    # .NET Framework 4.7.2 Version
-│   ├── Models/                     # Domain models and enums
-│   ├── Services/                   # Business logic and data access
-│   ├── Properties/                 # Assembly information
-│   ├── App.config                  # Configuration settings
-│   ├── TaskManager.csproj          # .NET Framework project file
-│   ├── Program.cs                  # Main application entry point
-│   └── README.md                   # Detailed project documentation
-├── TaskManagerModern/              # .NET 8 Version (Recommended)
-│   ├── Models/                     # Domain models with modern C# features
-│   ├── Services/                   # Business services with async patterns
-│   ├── TaskManagerModern.csproj    # Modern SDK-style project file
-│   └── Program.cs                  # Main application with latest C# syntax
+├── TaskManager/                    # .NET Framework 4.7.2 バージョン
+│   ├── Models/                     # ドメインモデルと列挙型
+│   ├── Services/                   # ビジネスロジックとデータアクセス
+│   ├── Properties/                 # アセンブリ情報
+│   ├── App.config                  # 構成設定
+│   ├── TaskManager.csproj          # .NET Frameworkプロジェクトファイル
+│   ├── Program.cs                  # メインアプリケーションエントリポイント
+│   └── README.md                   # 詳細なプロジェクトドキュメント
+├── TaskManagerModern/              # .NET 8 バージョン (推奨)
+│   ├── Models/                     # 最新のC#機能を使用したドメインモデル
+│   ├── Services/                   # 非同期パターンを使用したビジネスサービス
+│   ├── TaskManagerModern.csproj    # 最新のSDKスタイルプロジェクトファイル
+│   └── Program.cs                  # 最新のC#構文を使用したメインアプリケーション
 ├── .github/
-│   └── instructions/               # Development guidelines
-├── .gitignore                      # Git ignore rules
-├── dotnet-app.sln                  # Visual Studio solution file
-└── DEMO_GUIDE.md                   # Comprehensive demo documentation
+│   └── instructions/               # 開発ガイドライン
+├── .gitignore                      # Git除外ルール
+├── dotnet-app.sln                  # Visual Studioソリューションファイル
+└── DEMO_GUIDE.md                   # 包括的なデモドキュメント
 ```
 
-## 🚀 Quick Start
+## 🚀 クイックスタート
 
-### Run the Modern Version (Recommended)
+### モダンバージョンの実行 (推奨)
 ```bash
 cd TaskManagerModern
 dotnet run
 ```
 
-### Build the Framework Version
+### フレームワークバージョンのビルド
 ```bash
 cd TaskManager
-# Requires .NET Framework 4.7.2 Developer Pack
+# .NET Framework 4.7.2 Developer Packが必要です
 msbuild /t:rebuild
 ```
 
-## 📖 Features
+## 📖 機能
 
-Both applications include:
-- ✅ Complete CRUD operations
-- ✅ Task prioritization and status tracking
-- ✅ Due date management with overdue detection
-- ✅ Time tracking (estimated vs actual hours)
-- ✅ Assignment and tagging system
-- ✅ Advanced filtering and search
-- ✅ Statistical reporting
-- ✅ Interactive console UI
-- ✅ Persistent data storage
+両方のアプリケーションには以下が含まれています:
+- ✅ 完全なCRUD操作
+- ✅ タスクの優先順位付けとステータス追跡
+- ✅ 期限管理と期限超過検出
+- ✅ 時間追跡 (見積時間 vs 実績時間)
+- ✅ 割り当てとタグ付けシステム
+- ✅ 高度なフィルタリングと検索
+- ✅ 統計レポート
+- ✅ インタラクティブなコンソールUI
+- ✅ 永続的なデータストレージ
 
-## 🎯 Learning Objectives
+## 🎯 学習目標
 
-- Enterprise-grade application architecture
-- Async/await programming patterns
-- Data persistence strategies
-- Configuration management
-- Error handling and validation
-- Clean code principles
-- Modern C# language features
+- エンタープライズグレードのアプリケーションアーキテクチャ
+- Async/await プログラミングパターン
+- データ永続化戦略
+- 構成管理
+- エラー処理と検証
+- クリーンコードの原則
+- 最新のC#言語機能
 
-## 📚 Documentation
+## 📚 ドキュメント
 
-- See `DEMO_GUIDE.md` for comprehensive feature walkthrough
-- See `TaskManager/README.md` for detailed .NET Framework documentation
-- See `.github/instructions/` for development guidelines
+- 包括的な機能のウォークスルーについては `DEMO_GUIDE.md` を参照してください
+- .NET Frameworkの詳細なドキュメントについては `TaskManager/README.md` を参照してください
+- 開発ガイドラインについては `.github/instructions/` を参照してください
 
 ---
 
-Perfect for demos, learning, and as a foundation for production applications! 🎉
+デモ、学習、そして本番アプリケーションの基盤として最適です！ 🎉

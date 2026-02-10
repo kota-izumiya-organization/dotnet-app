@@ -1,186 +1,186 @@
-# Task Manager Demo Application
+# タスクマネージャー デモアプリケーション
 
-A comprehensive .NET Framework 4.7.2 Task Management application demonstrating best practices, patterns, and features for enterprise-level development.
+エンタープライズレベルの開発のためのベストプラクティス、パターン、機能を実証する包括的な.NET Framework 4.7.2 タスク管理アプリケーションです。
 
-## 🎯 Overview
+## 🎯 概要
 
-This application showcases a full-featured task management system with the following characteristics:
+このアプリケーションは、以下の特徴を持つ完全機能のタスク管理システムを紹介します:
 
-- **Architecture**: Clean separation of concerns with Models, Services, and Console UI
-- **Data Persistence**: XML-based file storage with async/await patterns
-- **Configuration Management**: App.config for settings and connection strings
-- **Error Handling**: Comprehensive exception handling and resource disposal
-- **Best Practices**: Following .NET Framework 4.7.2 and C# 7.3 guidelines
+- **アーキテクチャ**: モデル、サービス、コンソールUIの明確な関心事の分離
+- **データ永続化**: async/awaitパターンを使用したXMLベースのファイルストレージ
+- **構成管理**: 設定と接続文字列のためのApp.config
+- **エラー処理**: 包括的な例外処理とリソースの破棄
+- **ベストプラクティス**: .NET Framework 4.7.2とC# 7.3のガイドラインに従っています
 
-## 🏗️ Architecture
+## 🏗️ アーキテクチャ
 
 ```
 TaskManager/
 ├── Models/
-│   ├── Task.cs              # Main task entity with business logic
-│   ├── TaskPriority.cs      # Priority enumeration
-│   └── TaskStatus.cs        # Status enumeration
+│   ├── Task.cs              # ビジネスロジックを含むメインタスクエンティティ
+│   ├── TaskPriority.cs      # 優先度の列挙型
+│   └── TaskStatus.cs        # ステータスの列挙型
 ├── Services/
-│   ├── ITaskService.cs      # Service interface
-│   ├── TaskService.cs       # Main business logic service
-│   └── FileStorageService.cs # XML file persistence
+│   ├── ITaskService.cs      # サービスインターフェース
+│   ├── TaskService.cs       # メインビジネスロジックサービス
+│   └── FileStorageService.cs # XMLファイル永続化
 ├── Properties/
-│   └── AssemblyInfo.cs      # Assembly metadata
-├── Program.cs               # Console application entry point
-├── App.config               # Configuration settings
-└── TaskManager.csproj       # .NET Framework project file
+│   └── AssemblyInfo.cs      # アセンブリメタデータ
+├── Program.cs               # コンソールアプリケーションエントリポイント
+├── App.config               # 構成設定
+└── TaskManager.csproj       # .NET Frameworkプロジェクトファイル
 ```
 
-## ✨ Key Features
+## ✨ 主な機能
 
-### Task Management
-- ✅ Create, Read, Update, Delete (CRUD) operations
-- ✅ Task prioritization (Low, Normal, High, Critical)
-- ✅ Status tracking (Not Started, In Progress, Completed, Cancelled, On Hold)
-- ✅ Due date management with overdue detection
-- ✅ Time tracking (estimated vs. actual hours)
-- ✅ Task assignment and tagging
-- ✅ Search functionality
+### タスク管理
+- ✅ 作成、読み取り、更新、削除 (CRUD) 操作
+- ✅ タスクの優先順位付け (低、通常、高、重大)
+- ✅ ステータス追跡 (未開始、進行中、完了、キャンセル、保留)
+- ✅ 期限超過検出を伴う期限管理
+- ✅ 時間追跡 (見積時間 vs. 実績時間)
+- ✅ タスクの割り当てとタグ付け
+- ✅ 検索機能
 
-### Data & Persistence
-- ✅ XML-based storage with proper serialization
-- ✅ Async file operations with ConfigureAwait(false)
-- ✅ Auto-save functionality
-- ✅ Data validation and error handling
+### データと永続化
+- ✅ 適切なシリアライゼーションを使用したXMLベースのストレージ
+- ✅ ConfigureAwait(false)を使用した非同期ファイル操作
+- ✅ 自動保存機能
+- ✅ データ検証とエラー処理
 
-### User Interface
-- ✅ Interactive console menu system
-- ✅ Formatted data display with tables
-- ✅ Input validation and user feedback
-- ✅ Comprehensive search and filtering
+### ユーザーインターフェース
+- ✅ インタラクティブなコンソールメニューシステム
+- ✅ テーブルによるフォーマットされたデータ表示
+- ✅ 入力検証とユーザーフィードバック
+- ✅ 包括的な検索とフィルタリング
 
-### Configuration
-- ✅ App.config for application settings
-- ✅ Configurable limits and behaviors
-- ✅ Connection string management for future database integration
+### 構成
+- ✅ アプリケーション設定のためのApp.config
+- ✅ 設定可能な制限と動作
+- ✅ 将来のデータベース統合のための接続文字列管理
 
-## 🛠️ Technical Highlights
+## 🛠️ 技術的なハイライト
 
-### .NET Framework Best Practices Demonstrated
+### 実証されている.NET Frameworkのベストプラクティス
 
-1. **Async/Await Pattern**
-   - Proper use of `ConfigureAwait(false)` to prevent deadlocks
-   - Async file I/O operations
-   - Task-based asynchronous programming
+1. **Async/Awaitパターン**
+   - デッドロックを防ぐための`ConfigureAwait(false)`の適切な使用
+   - 非同期ファイルI/O操作
+   - タスクベースの非同期プログラミング
 
-2. **Resource Management**
-   - Proper implementation of `IDisposable` pattern
-   - Using statements for automatic resource cleanup
-   - Memory-efficient operations
+2. **リソース管理**
+   - `IDisposable`パターンの適切な実装
+   - 自動リソースクリーンアップのためのusingステートメント
+   - メモリ効率的な操作
 
-3. **Configuration Management**
-   - `ConfigurationManager.AppSettings` usage
-   - Connection strings configuration
-   - Environment-specific settings support
+3. **構成管理**
+   - `ConfigurationManager.AppSettings`の使用
+   - 接続文字列の構成
+   - 環境固有の設定のサポート
 
-4. **String Operations**
-   - Culture-aware string comparisons using `StringComparison.OrdinalIgnoreCase`
-   - Invariant culture for serialization
-   - Proper string formatting
+4. **文字列操作**
+   - `StringComparison.OrdinalIgnoreCase`を使用したカルチャ対応の文字列比較
+   - シリアライゼーションのためのインバリアントカルチャ
+   - 適切な文字列フォーマット
 
-5. **DateTime Handling**
-   - `DateTimeOffset` for timezone-aware operations
-   - Culture-invariant date parsing and formatting
-   - Proper date arithmetic
+5. **DateTime処理**
+   - タイムゾーン対応操作のための`DateTimeOffset`
+   - カルチャに依存しない日付の解析とフォーマット
+   - 適切な日付演算
 
-6. **Exception Handling**
-   - Specific exception types instead of generic `Exception`
-   - Proper error logging patterns
-   - Graceful degradation
+6. **例外処理**
+   - 汎用的な`Exception`の代わりに特定の例外タイプ
+   - 適切なエラーログパターン
+   - 適切なデグレーデーション
 
-7. **Type Safety**
-   - Strong typing with enums
-   - Generic collections usage
-   - GUID-based unique identifiers
+7. **型安全性**
+   - 列挙型による強い型付け
+   - ジェネリックコレクションの使用
+   - GUIDベースの一意の識別子
 
-## 🚀 Sample Data
+## 🚀 サンプルデータ
 
-The application includes sample tasks demonstrating:
-- Various priority levels and status states
-- Overdue task scenarios
-- Different assignees and work patterns
-- Realistic time tracking examples
-- Tagged categorization
+アプリケーションには以下を実証するサンプルタスクが含まれています:
+- 様々な優先度レベルとステータス状態
+- 期限超過タスクのシナリオ
+- 異なる担当者と作業パターン
+- 現実的な時間追跡の例
+- タグ付けによる分類
 
-## 📊 Features Showcase
+## 📊 機能のショーケース
 
-### Dashboard Statistics
-- Task count by status
-- Completion rate calculation
-- Overdue task alerts
-- High-priority task indicators
+### ダッシュボード統計
+- ステータス別のタスク数
+- 完了率の計算
+- 期限超過タスクのアラート
+- 高優先度タスクのインジケーター
 
-### Advanced Filtering
-- Filter by status, priority, assignee
-- Overdue task identification
-- Tag-based searching
-- Full-text search across title/description
+### 高度なフィルタリング
+- ステータス、優先度、担当者によるフィルター
+- 期限超過タスクの識別
+- タグベースの検索
+- タイトル/説明全体にわたる全文検索
 
-### Data Validation
-- Required field validation
-- Date format validation
-- Numeric input validation
-- Business rule enforcement (max tasks, etc.)
+### データ検証
+- 必須フィールドの検証
+- 日付フォーマットの検証
+- 数値入力の検証
+- ビジネスルールの実施 (最大タスク数など)
 
-## 🎓 Learning Objectives
+## 🎓 学習目標
 
-This demo application teaches:
+このデモアプリケーションは以下を教えます:
 
-1. **Clean Architecture Principles**
-   - Separation of concerns
-   - Dependency inversion
-   - Service layer patterns
+1. **クリーンアーキテクチャの原則**
+   - 関心事の分離
+   - 依存性逆転
+   - サービスレイヤーパターン
 
-2. **.NET Framework Development**
-   - Project file structure (non-SDK style)
-   - Assembly configuration
-   - Framework-specific patterns
+2. **.NET Framework開発**
+   - プロジェクトファイル構造 (非SDKスタイル)
+   - アセンブリ構成
+   - フレームワーク固有のパターン
 
-3. **Asynchronous Programming**
-   - Task-based operations
-   - Avoiding deadlocks
-   - Performance considerations
+3. **非同期プログラミング**
+   - タスクベースの操作
+   - デッドロックの回避
+   - パフォーマンスの考慮事項
 
-4. **Data Persistence**
-   - File-based storage
-   - XML serialization
-   - Data integrity
+4. **データ永続化**
+   - ファイルベースのストレージ
+   - XMLシリアライゼーション
+   - データの整合性
 
-5. **User Experience**
-   - Console application design
-   - Interactive menu systems
-   - Data presentation
+5. **ユーザーエクスペリエンス**
+   - コンソールアプリケーション設計
+   - インタラクティブなメニューシステム
+   - データのプレゼンテーション
 
-## 🔧 Build Instructions
+## 🔧 ビルド手順
 
-### Prerequisites
+### 前提条件
 - .NET Framework 4.7.2 Developer Pack
-- Visual Studio 2017 or later
-- MSBuild 15.0 or later
+- Visual Studio 2017以降
+- MSBuild 15.0以降
 
-### Building the Application
+### アプリケーションのビルド
 ```powershell
-# Using MSBuild (recommended for .NET Framework)
+# MSBuildの使用 (.NET Frameworkに推奨)
 msbuild /t:rebuild
 
-# Alternative using dotnet CLI (if targeting pack is installed)
+# dotnet CLIの使用 (ターゲットパックがインストールされている場合)
 dotnet build
 ```
 
-### Running the Application
+### アプリケーションの実行
 ```powershell
-# From bin/Debug or bin/Release directory
+# bin/Debugまたはbin/Releaseディレクトリから
 ./TaskManager.exe
 ```
 
-## 📝 Configuration Options
+## 📝 構成オプション
 
-Edit `App.config` to customize:
+`App.config`を編集してカスタマイズ:
 
 ```xml
 <appSettings>
@@ -190,35 +190,35 @@ Edit `App.config` to customize:
 </appSettings>
 ```
 
-## 🧪 Testing Scenarios
+## 🧪 テストシナリオ
 
-The application supports testing of:
-- CRUD operations
-- Concurrent access patterns
-- Large dataset handling
-- Error recovery scenarios
-- Performance under load
+アプリケーションは以下のテストをサポートします:
+- CRUD操作
+- 同時アクセスパターン
+- 大規模データセットの処理
+- エラー回復シナリオ
+- 負荷下でのパフォーマンス
 
-## 🔮 Extension Possibilities
+## 🔮 拡張の可能性
 
-This foundation supports adding:
-- Database persistence (SQL Server, SQLite)
-- REST API endpoints
-- Web UI interface
-- Authentication/authorization
-- Real-time notifications
-- Export/import functionality
-- Advanced reporting
+この基盤は以下の追加をサポートします:
+- データベース永続化 (SQL Server、SQLite)
+- REST APIエンドポイント
+- Web UIインターフェース
+- 認証/認可
+- リアルタイム通知
+- エクスポート/インポート機能
+- 高度なレポート
 
-## 📚 Code Quality Features
+## 📚 コード品質の特徴
 
-- Comprehensive XML documentation
-- Consistent naming conventions
-- SOLID principles implementation
-- Error handling best practices
-- Performance optimizations
-- Memory management patterns
+- 包括的なXMLドキュメント
+- 一貫した命名規則
+- SOLIDの原則の実装
+- エラー処理のベストプラクティス
+- パフォーマンスの最適化
+- メモリ管理パターン
 
 ---
 
-*This demo application serves as a comprehensive example of professional .NET Framework development, showcasing enterprise-ready patterns and practices.*
+*このデモアプリケーションは、プロフェッショナルな.NET Framework開発の包括的な例として機能し、エンタープライズ対応のパターンとプラクティスを紹介します。*

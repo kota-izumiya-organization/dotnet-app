@@ -9,16 +9,16 @@ using TaskManager.Services;
 namespace TaskManager
 {
     /// <summary>
-    /// Main program class for the Task Manager application
+    /// タスクマネージャーアプリケーションのメインプログラムクラス
     /// </summary>
     class Program
     {
         private static ITaskService _taskService;
 
         /// <summary>
-        /// Main entry point of the application
+        /// アプリケーションのメインエントリーポイント
         /// </summary>
-        /// <param name="args">Command line arguments</param>
+        /// <param name="args">コマンドライン引数</param>
         static async Task Main(string[] args)
         {
             Console.WriteLine("=================================");
@@ -26,12 +26,12 @@ namespace TaskManager
             Console.WriteLine("=================================");
             Console.WriteLine();
 
-            // Initialize the task service with proper disposal
+            // 適切な破棄を伴うタスクサービスの初期化
             using (_taskService = new TaskService())
             {
-                // Load existing tasks
+                // 既存のタスクを読み込む
                 Console.WriteLine("Loading existing tasks...");
-                // Use ConfigureAwait(false) to avoid deadlocks
+                // デッドロックを回避するためConfigureAwait(false)を使用
                 var loadResult = await _taskService.LoadAsync().ConfigureAwait(false);
                 
                 if (loadResult)
@@ -46,10 +46,10 @@ namespace TaskManager
 
                 Console.WriteLine();
 
-                // Create some sample data if no tasks exist
+                // タスクが存在しない場合はサンプルデータを作成
                 await CreateSampleDataIfNeeded().ConfigureAwait(false);
 
-                // Main application loop
+                // メインアプリケーションループ
                 var running = true;
                 while (running)
                 {
@@ -58,7 +58,7 @@ namespace TaskManager
                         DisplayMenu();
                         var choice = Console.ReadLine();
 
-                        // Use ConfigureAwait(false) for all async operations
+                        // すべての非同期操作にConfigureAwait(false)を使用
                         var continueRunning = await ProcessMenuChoice(choice).ConfigureAwait(false);
                         running = continueRunning;
                     }
@@ -77,7 +77,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Displays the main menu
+        /// メインメニューを表示
         /// </summary>
         private static void DisplayMenu()
         {
@@ -99,10 +99,10 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Processes the menu choice
+        /// メニュー選択を処理
         /// </summary>
-        /// <param name="choice">User's menu choice</param>
-        /// <returns>True to continue running, false to exit</returns>
+        /// <param name="choice">ユーザーのメニュー選択</param>
+        /// <returns>実行を続ける場合はTrue、終了する場合はFalse</returns>
         private static async Task<bool> ProcessMenuChoice(string choice)
         {
             switch (choice)
@@ -149,14 +149,14 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Creates sample data if no tasks exist
+        /// タスクが存在しない場合はサンプルデータを作成
         /// </summary>
         private static async Task CreateSampleDataIfNeeded()
         {
             var existingTasks = await _taskService.GetAllTasksAsync().ConfigureAwait(false);
             if (existingTasks.Any())
             {
-                return; // Tasks already exist
+                return; // タスクは既に存在する
             }
 
             Console.WriteLine("Creating sample tasks for demonstration...");
@@ -218,7 +218,7 @@ namespace TaskManager
                     Priority = TaskPriority.High,
                     Status = TaskStatus.InProgress,
                     AssignedTo = "Charlie Brown",
-                    DueDate = DateTimeOffset.Now.AddDays(-2), // Overdue
+                    DueDate = DateTimeOffset.Now.AddDays(-2), // 期限切れ
                     EstimatedHours = 16.0,
                     ActualHours = 10.0,
                     Tags = "security, audit, compliance"
@@ -236,7 +236,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Views all tasks
+        /// すべてのタスクを表示
         /// </summary>
         private static async Task ViewAllTasks()
         {
@@ -260,7 +260,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Creates a new task
+        /// 新しいタスクを作成
         /// </summary>
         private static async Task CreateNewTask()
         {
@@ -288,7 +288,7 @@ namespace TaskManager
                 Console.Write("Assigned to: ");
                 task.AssignedTo = Console.ReadLine();
 
-                // Priority selection
+                // 優先度の選択
                 Console.WriteLine("\nSelect Priority:");
                 Console.WriteLine("1. Low");
                 Console.WriteLine("2. Normal");
@@ -302,7 +302,7 @@ namespace TaskManager
                     task.Priority = (TaskPriority)priorityChoice;
                 }
 
-                // Due date
+                // 期限日
                 Console.Write("Due date (MM/dd/yyyy) or press Enter to skip: ");
                 var dueDateInput = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(dueDateInput))
@@ -313,7 +313,7 @@ namespace TaskManager
                     }
                 }
 
-                // Estimated hours
+                // 見積もり時間
                 Console.Write("Estimated hours (or press Enter to skip): ");
                 var estimatedHoursInput = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(estimatedHoursInput) && 
@@ -338,7 +338,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Updates an existing task
+        /// 既存のタスクを更新
         /// </summary>
         private static async Task UpdateTask()
         {
@@ -354,7 +354,7 @@ namespace TaskManager
                 return;
             }
 
-            DisplayTaskList(tasks.Take(10)); // Show first 10 tasks
+            DisplayTaskList(tasks.Take(10)); // 最初の10タスクを表示
             Console.WriteLine();
             Console.Write("Enter the task ID (first 8 characters): ");
             var taskIdInput = Console.ReadLine();
@@ -366,7 +366,7 @@ namespace TaskManager
                 return;
             }
 
-            // Find task by partial ID
+            // 部分的なIDでタスクを検索
             var task = tasks.FirstOrDefault(t => t.Id.ToString().StartsWith(taskIdInput, StringComparison.OrdinalIgnoreCase));
             if (task == null)
             {
@@ -420,9 +420,9 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Updates task status
+        /// タスクステータスを更新
         /// </summary>
-        /// <param name="task">Task to update</param>
+        /// <param name="task">更新するタスク</param>
         private static void UpdateTaskStatus(Models.Task task)
         {
             Console.WriteLine("\nSelect new status:");
@@ -441,9 +441,9 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Updates task priority
+        /// タスク優先度を更新
         /// </summary>
-        /// <param name="task">Task to update</param>
+        /// <param name="task">更新するタスク</param>
         private static void UpdateTaskPriority(Models.Task task)
         {
             Console.WriteLine("\nSelect new priority:");
@@ -461,7 +461,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Deletes a task
+        /// タスクを削除
         /// </summary>
         private static async Task DeleteTask()
         {
@@ -515,7 +515,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Views tasks by status
+        /// ステータス別にタスクを表示
         /// </summary>
         private static async Task ViewTasksByStatus()
         {
@@ -559,7 +559,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Views tasks by priority
+        /// 優先度別にタスクを表示
         /// </summary>
         private static async Task ViewTasksByPriority()
         {
@@ -602,7 +602,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Views overdue tasks
+        /// 期限切れタスクを表示
         /// </summary>
         private static async Task ViewOverdueTasks()
         {
@@ -628,7 +628,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Views tasks by assignee
+        /// 担当者別にタスクを表示
         /// </summary>
         private static async Task ViewTasksByAssignee()
         {
@@ -672,7 +672,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Views task statistics
+        /// タスク統計を表示
         /// </summary>
         private static async Task ViewTaskStatistics()
         {
@@ -680,7 +680,7 @@ namespace TaskManager
             Console.WriteLine("=== Task Statistics ===");
             Console.WriteLine();
 
-            // Cast to TaskService to access GetTaskStatistics method
+            // GetTaskStatisticsメソッドにアクセスするためTaskServiceにキャスト
             if (_taskService is TaskService taskService)
             {
                 var stats = taskService.GetTaskStatistics();
@@ -694,7 +694,7 @@ namespace TaskManager
                 Console.WriteLine($"Overdue: {stats["Overdue"]}");
                 Console.WriteLine($"High Priority: {stats["High Priority"]}");
 
-                // Calculate completion percentage
+                // 完了率を計算
                 if (stats["Total"] > 0)
                 {
                     var completionPercentage = (double)stats["Completed"] / stats["Total"] * 100;
@@ -707,7 +707,7 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Searches tasks by title or description
+        /// タイトルまたは説明でタスクを検索
         /// </summary>
         private static async Task SearchTasks()
         {
@@ -751,9 +751,9 @@ namespace TaskManager
         }
 
         /// <summary>
-        /// Displays a list of tasks in a formatted table
+        /// フォーマットされたテーブルでタスクリストを表示
         /// </summary>
-        /// <param name="tasks">Tasks to display</param>
+        /// <param name="tasks">表示するタスク</param>
         private static void DisplayTaskList(IEnumerable<Models.Task> tasks)
         {
             var taskList = tasks.ToList();
@@ -763,7 +763,7 @@ namespace TaskManager
                 return;
             }
 
-            // Table headers
+            // テーブルヘッダー
             Console.WriteLine($"{"ID",-10} {"Title",-25} {"Status",-15} {"Priority",-10} {"Assignee",-15} {"Due Date",-12}");
             Console.WriteLine(new string('-', 87));
 
@@ -776,7 +776,7 @@ namespace TaskManager
                 var assignee = string.IsNullOrWhiteSpace(task.AssignedTo) ? "Unassigned" : task.AssignedTo;
                 var dueDate = task.DueDate?.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture) ?? "No due date";
 
-                // Truncate long values to fit in columns
+                // 列に収まるように長い値を切り詰める
                 if (status.Length > 14) status = status.Substring(0, 14);
                 if (priority.Length > 9) priority = priority.Substring(0, 9);
                 if (assignee.Length > 14) assignee = assignee.Substring(0, 14);

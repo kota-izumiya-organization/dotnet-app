@@ -8,7 +8,7 @@ using TaskManager.Models;
 namespace TaskManager.Services
 {
     /// <summary>
-    /// Implementation of ITaskService for managing tasks
+    /// タスク管理のためのITaskServiceの実装
     /// </summary>
     public class TaskService : ITaskService, IDisposable
     {
@@ -19,30 +19,30 @@ namespace TaskManager.Services
         private bool _disposed = false;
 
         /// <summary>
-        /// Initializes a new instance of the TaskService
+        /// TaskServiceの新しいインスタンスを初期化します
         /// </summary>
         public TaskService()
         {
             _tasks = new List<Models.Task>();
             _storageService = new FileStorageService();
             
-            // Read configuration settings
+            // 構成設定を読み込みます
             if (!int.TryParse(ConfigurationManager.AppSettings["MaxTasksPerUser"], out _maxTasks))
             {
-                _maxTasks = 100; // Default value
+                _maxTasks = 100; // デフォルト値
             }
 
             if (!bool.TryParse(ConfigurationManager.AppSettings["AutoSaveEnabled"], out _autoSaveEnabled))
             {
-                _autoSaveEnabled = true; // Default value
+                _autoSaveEnabled = true; // デフォルト値
             }
         }
 
         /// <summary>
-        /// Creates a new task
+        /// 新しいタスクを作成します
         /// </summary>
-        /// <param name="task">The task to create</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="task">作成するタスク</param>
+        /// <returns>非同期操作を表すタスク</returns>
         public async Task<bool> CreateTaskAsync(Models.Task task)
         {
             if (task == null)
@@ -54,7 +54,7 @@ namespace TaskManager.Services
             if (_tasks.Count >= _maxTasks)
                 throw new InvalidOperationException($"Maximum number of tasks ({_maxTasks}) reached");
 
-            // Ensure the task doesn't already exist
+            // タスクがまだ存在しないことを確認します
             if (_tasks.Any(t => t.Id == task.Id))
                 throw new ArgumentException("Task with the same ID already exists", nameof(task));
 
@@ -70,10 +70,10 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Updates an existing task
+        /// 既存のタスクを更新します
         /// </summary>
-        /// <param name="task">The task to update</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="task">更新するタスク</param>
+        /// <returns>非同期操作を表すタスク</returns>
         public async Task<bool> UpdateTaskAsync(Models.Task task)
         {
             if (task == null)
@@ -83,12 +83,12 @@ namespace TaskManager.Services
             if (existingTaskIndex == -1)
                 return false;
 
-            task.Touch(); // Update the timestamp
+            task.Touch(); // タイムスタンプを更新
             _tasks[existingTaskIndex] = task;
 
             if (_autoSaveEnabled)
             {
-                // Use ConfigureAwait(false) to avoid deadlocks
+                // デッドロックを避けるためにConfigureAwait(false)を使用
                 await SaveAsync().ConfigureAwait(false);
             }
 
@@ -96,10 +96,10 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Deletes a task by ID
+        /// IDでタスクを削除します
         /// </summary>
-        /// <param name="taskId">The ID of the task to delete</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="taskId">削除するタスクのID</param>
+        /// <returns>非同期操作を表すタスク</returns>
         public async Task<bool> DeleteTaskAsync(Guid taskId)
         {
             var taskToRemove = _tasks.FirstOrDefault(t => t.Id == taskId);
@@ -110,7 +110,7 @@ namespace TaskManager.Services
 
             if (_autoSaveEnabled)
             {
-                // Use ConfigureAwait(false) to avoid deadlocks
+                // デッドロックを避けるためにConfigureAwait(false)を使用
                 await SaveAsync().ConfigureAwait(false);
             }
 
@@ -118,10 +118,10 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Gets a task by ID
+        /// IDでタスクを取得します
         /// </summary>
-        /// <param name="taskId">The ID of the task</param>
-        /// <returns>The task if found, null otherwise</returns>
+        /// <param name="taskId">タスクのID</param>
+        /// <returns>見つかった場合はタスク、それ以外はnull</returns>
         public async Task<Models.Task> GetTaskByIdAsync(Guid taskId)
         {
             // Simulate async operation for consistency
@@ -130,21 +130,21 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Gets all tasks
+        /// すべてのタスクを取得します
         /// </summary>
-        /// <returns>Collection of all tasks</returns>
+        /// <returns>すべてのタスクのコレクション</returns>
         public async Task<IEnumerable<Models.Task>> GetAllTasksAsync()
         {
             // Simulate async operation for consistency
             await Task.Yield();
-            return _tasks.ToList(); // Return a copy to prevent external modification
+            return _tasks.ToList(); // 外部からの変更を防ぐためにコピーを返します
         }
 
         /// <summary>
-        /// Gets tasks by status
+        /// ステータスでタスクを取得します
         /// </summary>
-        /// <param name="status">The status to filter by</param>
-        /// <returns>Collection of tasks with the specified status</returns>
+        /// <param name="status">フィルターするステータス</param>
+        /// <returns>指定されたステータスを持つタスクのコレクション</returns>
         public async Task<IEnumerable<Models.Task>> GetTasksByStatusAsync(TaskStatus status)
         {
             // Simulate async operation for consistency
@@ -153,10 +153,10 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Gets tasks by priority
+        /// 優先度でタスクを取得します
         /// </summary>
-        /// <param name="priority">The priority to filter by</param>
-        /// <returns>Collection of tasks with the specified priority</returns>
+        /// <param name="priority">フィルターする優先度</param>
+        /// <returns>指定された優先度を持つタスクのコレクション</returns>
         public async Task<IEnumerable<Models.Task>> GetTasksByPriorityAsync(TaskPriority priority)
         {
             // Simulate async operation for consistency
@@ -165,9 +165,9 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Gets overdue tasks
+        /// 期限超過のタスクを取得します
         /// </summary>
-        /// <returns>Collection of overdue tasks</returns>
+        /// <returns>期限超過のタスクのコレクション</returns>
         public async Task<IEnumerable<Models.Task>> GetOverdueTasksAsync()
         {
             // Simulate async operation for consistency
@@ -176,10 +176,10 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Gets tasks assigned to a specific person
+        /// 特定の担当者に割り当てられたタスクを取得します
         /// </summary>
-        /// <param name="assignee">The person the tasks are assigned to</param>
-        /// <returns>Collection of tasks assigned to the person</returns>
+        /// <param name="assignee">タスクが割り当てられている担当者</param>
+        /// <returns>担当者に割り当てられたタスクのコレクション</returns>
         public async Task<IEnumerable<Models.Task>> GetTasksByAssigneeAsync(string assignee)
         {
             if (string.IsNullOrWhiteSpace(assignee))
@@ -191,24 +191,24 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Saves all tasks to persistent storage
+        /// すべてのタスクを永続的なストレージに保存します
         /// </summary>
-        /// <returns>Task representing the async operation</returns>
+        /// <returns>非同期操作を表すタスク</returns>
         public async Task<bool> SaveAsync()
         {
-            // Use ConfigureAwait(false) to avoid deadlocks
+            // デッドロックを避けるためにConfigureAwait(false)を使用
             return await _storageService.SaveTasksAsync(_tasks).ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Loads all tasks from persistent storage
+        /// 永続的なストレージからすべてのタスクを読み込みます
         /// </summary>
-        /// <returns>Task representing the async operation</returns>
+        /// <returns>非同期操作を表すタスク</returns>
         public async Task<bool> LoadAsync()
         {
             try
             {
-                // Use ConfigureAwait(false) to avoid deadlocks
+                // デッドロックを避けるためにConfigureAwait(false)を使用
                 var loadedTasks = await _storageService.LoadTasksAsync().ConfigureAwait(false);
                 
                 _tasks.Clear();
@@ -224,9 +224,9 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Gets task statistics
+        /// タスク統計を取得します
         /// </summary>
-        /// <returns>Dictionary containing task statistics</returns>
+        /// <returns>タスク統計を含む辞書</returns>
         public Dictionary<string, int> GetTaskStatistics()
         {
             var stats = new Dictionary<string, int>
@@ -245,7 +245,7 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Disposes the TaskService
+        /// TaskServiceを破棄します
         /// </summary>
         public void Dispose()
         {
@@ -254,9 +254,9 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Protected dispose method
+        /// 保護されたdisposeメソッド
         /// </summary>
-        /// <param name="disposing">True if disposing managed resources</param>
+        /// <param name="disposing">マネージリソースを破棄する場合はtrue</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)

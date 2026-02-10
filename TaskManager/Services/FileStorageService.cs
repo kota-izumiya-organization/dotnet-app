@@ -11,7 +11,7 @@ using System.Globalization;
 namespace TaskManager.Services
 {
     /// <summary>
-    /// Service for handling file storage operations using XML
+    /// XMLを使用してファイルストレージ操作を処理するサービス
     /// </summary>
     public class FileStorageService : IDisposable
     {
@@ -19,7 +19,7 @@ namespace TaskManager.Services
         private bool _disposed = false;
 
         /// <summary>
-        /// Initializes a new instance of the FileStorageService
+        /// FileStorageServiceの新しいインスタンスを初期化します
         /// </summary>
         public FileStorageService()
         {
@@ -27,10 +27,10 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Saves tasks to XML file
+        /// タスクをXMLファイルに保存します
         /// </summary>
-        /// <param name="tasks">Collection of tasks to save</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="tasks">保存するタスクのコレクション</param>
+        /// <returns>非同期操作を表すタスク</returns>
         public async Task<bool> SaveTasksAsync(IEnumerable<Models.Task> tasks)
         {
             try
@@ -42,22 +42,22 @@ namespace TaskManager.Services
                     )
                 );
 
-                // Use ConfigureAwait(false) to avoid deadlocks
+                // デッドロックを避けるためにConfigureAwait(false)を使用
                 await Task.Run(() => doc.Save(_filePath)).ConfigureAwait(false);
                 return true;
             }
             catch (Exception ex)
             {
-                // In a real application, you would use a logging framework
+                // 実際のアプリケーションでは、ログフレームワークを使用します
                 Console.WriteLine($"Error saving tasks: {ex.Message}");
                 return false;
             }
         }
 
         /// <summary>
-        /// Loads tasks from XML file
+        /// XMLファイルからタスクを読み込みます
         /// </summary>
-        /// <returns>Collection of loaded tasks</returns>
+        /// <returns>読み込まれたタスクのコレクション</returns>
         public async Task<IEnumerable<Models.Task>> LoadTasksAsync()
         {
             try
@@ -67,7 +67,7 @@ namespace TaskManager.Services
                     return Enumerable.Empty<Models.Task>();
                 }
 
-                // Use ConfigureAwait(false) to avoid deadlocks
+                // デッドロックを避けるためにConfigureAwait(false)を使用
                 var doc = await Task.Run(() => XDocument.Load(_filePath)).ConfigureAwait(false);
                 
                 var tasks = doc.Root.Elements("Task")
@@ -79,17 +79,17 @@ namespace TaskManager.Services
             }
             catch (Exception ex)
             {
-                // In a real application, you would use a logging framework
+                // 実際のアプリケーションでは、ログフレームワークを使用します
                 Console.WriteLine($"Error loading tasks: {ex.Message}");
                 return Enumerable.Empty<Models.Task>();
             }
         }
 
         /// <summary>
-        /// Creates an XML element from a task
+        /// タスクからXML要素を作成します
         /// </summary>
-        /// <param name="task">The task to convert</param>
-        /// <returns>XElement representing the task</returns>
+        /// <param name="task">変換するタスク</param>
+        /// <returns>タスクを表すXElement</returns>
         private XElement CreateTaskElement(Models.Task task)
         {
             return new XElement("Task",
@@ -109,27 +109,27 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Parses an XML element to create a task
+        /// XML要素を解析してタスクを作成します
         /// </summary>
-        /// <param name="element">The XML element to parse</param>
-        /// <returns>Task object or null if parsing fails</returns>
+        /// <param name="element">解析するXML要素</param>
+        /// <returns>Taskオブジェクト、解析に失敗した場合はnull</returns>
         private Models.Task ParseTaskElement(XElement element)
         {
             try
             {
                 var task = new Models.Task();
 
-                // Parse ID
+                // IDを解析
                 if (Guid.TryParse(element.Element("Id")?.Value, out var id))
                 {
                     task.Id = id;
                 }
 
-                // Parse basic properties
+                // 基本プロパティを解析
                 task.Title = element.Element("Title")?.Value ?? string.Empty;
                 task.Description = element.Element("Description")?.Value ?? string.Empty;
 
-                // Parse enums
+                // 列挙型を解析
                 if (int.TryParse(element.Element("Priority")?.Value, out var priority))
                 {
                     task.Priority = (TaskPriority)priority;
@@ -140,7 +140,7 @@ namespace TaskManager.Services
                     task.Status = (TaskStatus)status;
                 }
 
-                // Parse dates using DateTimeOffset for proper timezone handling
+                // 適切なタイムゾーン処理のためにDateTimeOffsetを使用して日付を解析
                 if (DateTimeOffset.TryParse(element.Element("CreatedAt")?.Value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var createdAt))
                 {
                     task.CreatedAt = createdAt;
@@ -158,7 +158,7 @@ namespace TaskManager.Services
                     task.DueDate = dueDate;
                 }
 
-                // Parse other properties
+                // その他のプロパティを解析
                 task.AssignedTo = element.Element("AssignedTo")?.Value ?? string.Empty;
                 task.Tags = element.Element("Tags")?.Value ?? string.Empty;
 
@@ -184,7 +184,7 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Disposes the FileStorageService
+        /// FileStorageServiceを破棄します
         /// </summary>
         public void Dispose()
         {
@@ -193,16 +193,16 @@ namespace TaskManager.Services
         }
 
         /// <summary>
-        /// Protected dispose method
+        /// 保護されたdisposeメソッド
         /// </summary>
-        /// <param name="disposing">True if disposing managed resources</param>
+        /// <param name="disposing">マネージリソースを破棄する場合はtrue</param>
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposed)
             {
                 if (disposing)
                 {
-                    // Dispose managed resources here if any
+                    // マネージリソースがあればここで破棄します
                 }
                 _disposed = true;
             }

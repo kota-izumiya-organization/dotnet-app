@@ -4,72 +4,72 @@ using System.Globalization;
 namespace TaskManager.Models
 {
     /// <summary>
-    /// Represents a task in the task management system
+    /// タスク管理システムにおけるタスクを表します
     /// </summary>
     public class Task : IEquatable<Task>
     {
         /// <summary>
-        /// Unique identifier for the task
+        /// タスクの一意識別子
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Title of the task
+        /// タスクのタイトル
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Detailed description of the task
+        /// タスクの詳細説明
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Priority level of the task
+        /// タスクの優先度レベル
         /// </summary>
         public TaskPriority Priority { get; set; }
 
         /// <summary>
-        /// Current status of the task
+        /// タスクの現在のステータス
         /// </summary>
         public TaskStatus Status { get; set; }
 
         /// <summary>
-        /// Date and time when the task was created
+        /// タスクが作成された日時
         /// </summary>
         public DateTimeOffset CreatedAt { get; set; }
 
         /// <summary>
-        /// Date and time when the task was last updated
+        /// タスクが最後に更新された日時
         /// </summary>
         public DateTimeOffset UpdatedAt { get; set; }
 
         /// <summary>
-        /// Optional due date for the task
+        /// タスクのオプションの期限日
         /// </summary>
         public DateTimeOffset? DueDate { get; set; }
 
         /// <summary>
-        /// Person assigned to the task
+        /// タスクに割り当てられた担当者
         /// </summary>
         public string AssignedTo { get; set; }
 
         /// <summary>
-        /// Additional tags for categorization
+        /// 分類用の追加タグ
         /// </summary>
         public string Tags { get; set; }
 
         /// <summary>
-        /// Estimated hours to complete the task
+        /// タスク完了までの推定時間（時間単位）
         /// </summary>
         public double? EstimatedHours { get; set; }
 
         /// <summary>
-        /// Actual hours spent on the task
+        /// タスクに費やした実際の時間
         /// </summary>
         public double ActualHours { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the Task class
+        /// Taskクラスの新しいインスタンスを初期化します
         /// </summary>
         public Task()
         {
@@ -82,7 +82,7 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Updates the task's timestamp
+        /// タスクのタイムスタンプを更新します
         /// </summary>
         public void Touch()
         {
@@ -90,9 +90,9 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Checks if the task is overdue
+        /// タスクが期限切れかどうかを確認します
         /// </summary>
-        /// <returns>True if the task is overdue, false otherwise</returns>
+        /// <returns>タスクが期限切れの場合はtrue、それ以外の場合はfalse</returns>
         public bool IsOverdue()
         {
             if (!DueDate.HasValue || Status == TaskStatus.Completed || Status == TaskStatus.Cancelled)
@@ -104,9 +104,9 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Gets the number of days until the due date
+        /// 期限日までの日数を取得します
         /// </summary>
-        /// <returns>Number of days until due date, or null if no due date is set</returns>
+        /// <returns>期限日までの日数、期限日が設定されていない場合はnull</returns>
         public int? DaysUntilDue()
         {
             if (!DueDate.HasValue)
@@ -119,14 +119,14 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Gets a display-friendly status string
+        /// 表示用のステータス文字列を取得します
         /// </summary>
-        /// <returns>Formatted status string</returns>
+        /// <returns>フォーマット済みのステータス文字列</returns>
         public string GetStatusDisplay()
         {
             var statusText = Status.ToString();
             
-            // Add spacing for camelCase enum values
+            // キャメルケースの列挙値にスペースを追加
             if (Status == TaskStatus.NotStarted)
                 statusText = "Not Started";
             else if (Status == TaskStatus.InProgress)
@@ -143,9 +143,9 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Returns a string representation of the task
+        /// タスクの文字列表現を返します
         /// </summary>
-        /// <returns>String representation</returns>
+        /// <returns>文字列表現</returns>
         public override string ToString()
         {
             var dueInfo = DueDate.HasValue 
@@ -156,10 +156,10 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Determines whether the specified Task is equal to the current Task
+        /// 指定されたTaskが現在のTaskと等しいかどうかを判定します
         /// </summary>
-        /// <param name="other">The Task to compare with the current Task</param>
-        /// <returns>true if the specified Task is equal to the current Task; otherwise, false</returns>
+        /// <param name="other">現在のTaskと比較するTask</param>
+        /// <returns>指定されたTaskが現在のTaskと等しい場合はtrue、それ以外の場合はfalse</returns>
         public bool Equals(Task other)
         {
             if (other == null)
@@ -169,19 +169,19 @@ namespace TaskManager.Models
         }
 
         /// <summary>
-        /// Determines whether the specified object is equal to the current Task
+        /// 指定されたオブジェクトが現在のTaskと等しいかどうかを判定します
         /// </summary>
-        /// <param name="obj">The object to compare with the current Task</param>
-        /// <returns>true if the specified object is equal to the current Task; otherwise, false</returns>
+        /// <param name="obj">現在のTaskと比較するオブジェクト</param>
+        /// <returns>指定されたオブジェクトが現在のTaskと等しい場合はtrue、それ以外の場合はfalse</returns>
         public override bool Equals(object obj)
         {
             return Equals(obj as Task);
         }
 
         /// <summary>
-        /// Serves as the default hash function
+        /// デフォルトのハッシュ関数として機能します
         /// </summary>
-        /// <returns>A hash code for the current Task</returns>
+        /// <returns>現在のTaskのハッシュコード</returns>
         public override int GetHashCode()
         {
             return Id.GetHashCode();

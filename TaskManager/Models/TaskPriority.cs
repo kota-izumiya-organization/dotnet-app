@@ -3,7 +3,7 @@ using System;
 namespace TaskManager.Models
 {
     /// <summary>
-    /// Represents the priority levels for tasks
+    /// タスクの優先度レベルを表します
     /// </summary>
     public enum TaskPriority
     {

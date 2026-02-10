@@ -1,16 +1,16 @@
 # TaskManagerModern (.NET 8)
 
-## Build Instructions
+## ビルド手順
 
-To build the project:
+プロジェクトをビルドするには:
 ```powershell
 cd "C:\Users\ravi.cheetirala\OneDrive - Avanade\Work\GHCP ACM\Workshop\Foundations\dotnet-app\TaskManagerModern"
 dotnet build
 ```
 
-## Run Instructions
+## 実行手順
 
-To run the project:
+プロジェクトを実行するには:
 ```powershell
 cd "C:\Users\ravi.cheetirala\OneDrive - Avanade\Work\GHCP ACM\Workshop\Foundations\dotnet-app\TaskManagerModern"
 dotnet run

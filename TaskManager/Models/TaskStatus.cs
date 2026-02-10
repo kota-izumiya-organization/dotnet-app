@@ -3,7 +3,7 @@ using System;
 namespace TaskManager.Models
 {
     /// <summary>
-    /// Represents the status of a task
+    /// タスクのステータスを表します
     /// </summary>
     public enum TaskStatus
     {

@@ -1,59 +1,59 @@
-# Task Manager Demo Applications
+# タスクマネージャー デモアプリケーション
 
-I've created two comprehensive .NET demo applications for you:
+2つの包括的な.NETデモアプリケーションを作成しました:
 
 ## 1. TaskManager (.NET Framework 4.7.2)
-**Location**: `TaskManager/`
+**場所**: `TaskManager/`
 
-This is a full-featured **enterprise-grade .NET Framework application** that demonstrates:
+これは、以下を実証する完全機能を備えた**エンタープライズグレードの.NET Frameworkアプリケーション**です:
 
-### 🏗️ Architecture & Design
-- **Clean Architecture** with Models, Services, and UI separation
-- **Service Pattern** with interfaces and implementations
-- **Repository Pattern** for data access
-- **Dependency management** following SOLID principles
+### 🏗️ アーキテクチャと設計
+- **クリーンアーキテクチャ** - モデル、サービス、UIの分離
+- **サービスパターン** - インターフェースと実装
+- **リポジトリパターン** - データアクセス
+- **依存関係管理** - SOLIDの原則に従った設計
 
-### 🔧 .NET Framework Best Practices
-- **Async/Await patterns** with `ConfigureAwait(false)`
-- **IDisposable implementation** for proper resource management
-- **Configuration management** via App.config
-- **XML-based persistence** with proper serialization
-- **Exception handling** with specific exception types
-- **Culture-aware operations** for dates and strings
+### 🔧 .NET Frameworkのベストプラクティス
+- **Async/Awaitパターン** - `ConfigureAwait(false)`の使用
+- **IDisposableの実装** - 適切なリソース管理
+- **構成管理** - App.configを使用
+- **XMLベースの永続化** - 適切なシリアライゼーション
+- **例外処理** - 特定の例外タイプの使用
+- **カルチャ対応操作** - 日付と文字列の処理
 
-### ✨ Business Features
-- Complete CRUD operations for tasks
-- Task prioritization (Low, Normal, High, Critical)
-- Status tracking (Not Started, In Progress, Completed, Cancelled, On Hold)
-- Due date management with overdue detection
-- Time tracking (estimated vs actual hours)
-- Task assignment and tagging system
-- Advanced filtering and search capabilities
-- Statistical reporting and analytics
+### ✨ ビジネス機能
+- タスクの完全なCRUD操作
+- タスクの優先順位付け (低、通常、高、重大)
+- ステータス追跡 (未開始、進行中、完了、キャンセル、保留)
+- 期限管理と期限超過検出
+- 時間追跡 (見積時間 vs 実績時間)
+- タスクの割り当てとタグ付けシステム
+- 高度なフィルタリングと検索機能
+- 統計レポートと分析
 
-### 📊 User Interface
-- Interactive console menu system
-- Formatted table displays
-- Input validation and user feedback
-- Real-time task statistics
+### 📊 ユーザーインターフェース
+- インタラクティブなコンソールメニューシステム
+- フォーマットされたテーブル表示
+- 入力検証とユーザーフィードバック
+- リアルタイムタスク統計
 
-**Note**: Requires .NET Framework 4.7.2 Developer Pack to build. The code follows C# 7.3 syntax limitations.
+**注意**: ビルドには.NET Framework 4.7.2 Developer Packが必要です。コードはC# 7.3の構文制限に従っています。
 
 ---
 
 ## 2. TaskManagerModern (.NET 8)
-**Location**: `TaskManagerModern/TaskManagerModern/`
+**場所**: `TaskManagerModern/TaskManagerModern/`
 
-This is a **modern .NET 8 version** that you can run immediately:
+これはすぐに実行できる**最新の.NET 8バージョン**です:
 
-### 🚀 Modern Features
-- **Latest C# language features** (file-scoped namespaces, records, pattern matching)
-- **JSON-based persistence** with System.Text.Json
-- **Simplified architecture** with modern patterns
-- **Nullable reference types** for better null safety
-- **Collection expressions** and modern syntax
+### 🚀 最新機能
+- **最新のC#言語機能** (ファイルスコープ名前空間、レコード、パターンマッチング)
+- **JSONベースの永続化** - System.Text.Jsonを使用
+- **シンプル化されたアーキテクチャ** - 最新のパターン
+- **null許容参照型** - より優れたnull安全性
+- **コレクション式** と最新の構文
 
-### 🏃‍♂️ Ready to Run
+### 🏃‍♂️ すぐに実行可能
 ```powershell
 cd "TaskManagerModern\TaskManagerModern"
 dotnet run
@@ -61,66 +61,66 @@ dotnet run
 
 ---
 
-## 🎯 Demo Highlights
+## 🎯 デモのハイライト
 
-Both applications showcase:
+両方のアプリケーションは以下を紹介します:
 
-### Technical Excellence
-- **Comprehensive error handling** with try-catch patterns
-- **Resource management** with using statements and IDisposable
-- **Asynchronous programming** with proper async/await usage
-- **Data validation** and business rule enforcement
-- **Clean code principles** with meaningful names and documentation
+### 技術的な優秀性
+- **包括的なエラー処理** - try-catchパターンの使用
+- **リソース管理** - usingステートメントとIDisposableの使用
+- **非同期プログラミング** - 適切なasync/awaitの使用
+- **データ検証** - ビジネスルールの実施
+- **クリーンコードの原則** - 意味のある名前とドキュメント
 
-### Real-World Scenarios
-- **Task lifecycle management** from creation to completion
-- **Priority-based workflow** handling
-- **Deadline tracking** with overdue alerts
-- **Team collaboration** features with assignee management
-- **Project categorization** with tags and descriptions
+### 実世界のシナリオ
+- **タスクライフサイクル管理** - 作成から完了まで
+- **優先度ベースのワークフロー** 処理
+- **期限追跡** - 期限超過アラート付き
+- **チームコラボレーション** 機能 - 担当者管理
+- **プロジェクト分類** - タグと説明による分類
 
-### Learning Objectives
-1. **Enterprise Architecture Patterns**
-2. **Async Programming Best Practices**
-3. **Data Persistence Strategies**
-4. **User Interface Design Principles**
-5. **Configuration Management**
-6. **Testing and Validation Approaches**
-
----
-
-## 🔥 Key Differentiators from "Hello World"
-
-This isn't just a simple console output - it's a **production-ready application foundation** that demonstrates:
-
-- ✅ **Complex business logic** with multiple interacting components
-- ✅ **Data persistence** with file-based storage
-- ✅ **User interaction** with menu systems and input validation
-- ✅ **Error handling** and recovery scenarios
-- ✅ **Performance considerations** with async operations
-- ✅ **Scalability patterns** ready for database integration
-- ✅ **Professional code organization** with proper separation of concerns
-- ✅ **Documentation** and maintainability features
+### 学習目標
+1. **エンタープライズアーキテクチャパターン**
+2. **非同期プログラミングのベストプラクティス**
+3. **データ永続化戦略**
+4. **ユーザーインターフェース設計原則**
+5. **構成管理**
+6. **テストと検証のアプローチ**
 
 ---
 
-## 🚀 Quick Start
+## 🔥 "Hello World"との主な違い
 
-### Run the Modern Version (Recommended)
+これは単純なコンソール出力ではありません - **本番環境対応のアプリケーション基盤**であり、以下を実証します:
+
+- ✅ **複雑なビジネスロジック** - 複数の相互作用するコンポーネント
+- ✅ **データ永続化** - ファイルベースのストレージ
+- ✅ **ユーザーインタラクション** - メニューシステムと入力検証
+- ✅ **エラー処理** と回復シナリオ
+- ✅ **パフォーマンスの考慮事項** - 非同期操作
+- ✅ **スケーラビリティパターン** - データベース統合の準備
+- ✅ **プロフェッショナルなコード組織** - 適切な関心事の分離
+- ✅ **ドキュメント** と保守性の機能
+
+---
+
+## 🚀 クイックスタート
+
+### モダンバージョンの実行 (推奨)
 ```powershell
 cd "c:\Users\ravi.cheetirala\OneDrive - Avanade\Work\GHCP ACM\Workshop\Foundations\dotnet-app\TaskManagerModern\TaskManagerModern"
 dotnet run
 ```
 
-### Explore the Framework Version
+### フレームワークバージョンの探索
 ```powershell
 cd "c:\Users\ravi.cheetirala\OneDrive - Avanade\Work\GHCP ACM\Workshop\Foundations\dotnet-app\TaskManager"
-# Install .NET Framework 4.7.2 Developer Pack first
+# 最初に.NET Framework 4.7.2 Developer Packをインストールしてください
 msbuild /t:rebuild
 ```
 
-Both applications include sample data and interactive tutorials to demonstrate all features!
+両方のアプリケーションには、すべての機能を実証するサンプルデータとインタラクティブなチュートリアルが含まれています！
 
 ---
 
-**Perfect for demos, learning, and as a foundation for real applications!** 🎉
+**デモ、学習、そして実際のアプリケーションの基盤として最適です！** 🎉

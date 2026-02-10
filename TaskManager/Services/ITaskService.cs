@@ -6,81 +6,81 @@ using TaskManager.Models;
 namespace TaskManager.Services
 {
     /// <summary>
-    /// Interface for task management operations
+    /// タスク管理操作のインターフェース
     /// </summary>
     public interface ITaskService
     {
         /// <summary>
-        /// Creates a new task
+        /// 新しいタスクを作成します
         /// </summary>
-        /// <param name="task">The task to create</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="task">作成するタスク</param>
+        /// <returns>非同期操作を表すタスク</returns>
         Task<bool> CreateTaskAsync(Models.Task task);
 
         /// <summary>
-        /// Updates an existing task
+        /// 既存のタスクを更新します
         /// </summary>
-        /// <param name="task">The task to update</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="task">更新するタスク</param>
+        /// <returns>非同期操作を表すタスク</returns>
         Task<bool> UpdateTaskAsync(Models.Task task);
 
         /// <summary>
-        /// Deletes a task by ID
+        /// IDでタスクを削除します
         /// </summary>
-        /// <param name="taskId">The ID of the task to delete</param>
-        /// <returns>Task representing the async operation</returns>
+        /// <param name="taskId">削除するタスクのID</param>
+        /// <returns>非同期操作を表すタスク</returns>
         Task<bool> DeleteTaskAsync(Guid taskId);
 
         /// <summary>
-        /// Gets a task by ID
+        /// IDでタスクを取得します
         /// </summary>
-        /// <param name="taskId">The ID of the task</param>
-        /// <returns>The task if found, null otherwise</returns>
+        /// <param name="taskId">タスクのID</param>
+        /// <returns>見つかった場合はタスク、それ以外はnull</returns>
         Task<Models.Task> GetTaskByIdAsync(Guid taskId);
 
         /// <summary>
-        /// Gets all tasks
+        /// すべてのタスクを取得します
         /// </summary>
-        /// <returns>Collection of all tasks</returns>
+        /// <returns>すべてのタスクのコレクション</returns>
         Task<IEnumerable<Models.Task>> GetAllTasksAsync();
 
         /// <summary>
-        /// Gets tasks by status
+        /// ステータスでタスクを取得します
         /// </summary>
-        /// <param name="status">The status to filter by</param>
-        /// <returns>Collection of tasks with the specified status</returns>
+        /// <param name="status">フィルターするステータス</param>
+        /// <returns>指定されたステータスを持つタスクのコレクション</returns>
         Task<IEnumerable<Models.Task>> GetTasksByStatusAsync(TaskStatus status);
 
         /// <summary>
-        /// Gets tasks by priority
+        /// 優先度でタスクを取得します
         /// </summary>
-        /// <param name="priority">The priority to filter by</param>
-        /// <returns>Collection of tasks with the specified priority</returns>
+        /// <param name="priority">フィルターする優先度</param>
+        /// <returns>指定された優先度を持つタスクのコレクション</returns>
         Task<IEnumerable<Models.Task>> GetTasksByPriorityAsync(TaskPriority priority);
 
         /// <summary>
-        /// Gets overdue tasks
+        /// 期限超過のタスクを取得します
         /// </summary>
-        /// <returns>Collection of overdue tasks</returns>
+        /// <returns>期限超過のタスクのコレクション</returns>
         Task<IEnumerable<Models.Task>> GetOverdueTasksAsync();
 
         /// <summary>
-        /// Gets tasks assigned to a specific person
+        /// 特定の担当者に割り当てられたタスクを取得します
         /// </summary>
-        /// <param name="assignee">The person the tasks are assigned to</param>
-        /// <returns>Collection of tasks assigned to the person</returns>
+        /// <param name="assignee">タスクが割り当てられている担当者</param>
+        /// <returns>担当者に割り当てられたタスクのコレクション</returns>
         Task<IEnumerable<Models.Task>> GetTasksByAssigneeAsync(string assignee);
 
         /// <summary>
-        /// Saves all tasks to persistent storage
+        /// すべてのタスクを永続的なストレージに保存します
         /// </summary>
-        /// <returns>Task representing the async operation</returns>
+        /// <returns>非同期操作を表すタスク</returns>
         Task<bool> SaveAsync();
 
         /// <summary>
-        /// Loads all tasks from persistent storage
+        /// 永続的なストレージからすべてのタスクを読み込みます
         /// </summary>
-        /// <returns>Task representing the async operation</returns>
+        /// <returns>非同期操作を表すタスク</returns>
         Task<bool> LoadAsync();
     }
 }
